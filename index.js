@@ -1,17 +1,11 @@
-const { PrismaClient } = require('@prisma/client')
+const pg = require('pg')
+const express = require('express')
+const client = new pg.Client(process.env.DATABASE_URL || 'postgres://localhost/block37a_career_simulation')
+const app = express()
 
-const prisma = new PrismaClient()
+const init = async () => {
 
-async function main() {
-  // ... you will write your Prisma Client queries here
-}
-
-main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+  const port = process.env.PORT || 3000
+  app.listen(port, () => console.log(`listening on port ${port}`));
+};
+init()
